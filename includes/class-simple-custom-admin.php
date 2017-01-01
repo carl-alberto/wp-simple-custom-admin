@@ -168,28 +168,84 @@ class Simple_Custom_Admin {
 		if ( !empty ( get_option( 'csa1_checkbox_remove_help' ) ) ) {
 			add_filter( 'contextual_help', array( $this, 'remove_helptabs' ), 999, 3 );
 		}
+
+		//This will remove the default dashboard widgets
+		if ( !empty ( get_option( 'csa1_checkbox_remove_dashboard_widgets' ) ) ) {
+			add_action( 'admin_init', array( $this, 'remove_dashboard_meta' ), 999 );
+		}
+
+		//This will display a customadmin dashboard  widget
+		if ( !empty ( get_option( 'csa1_checkbox_remove_dashboard_widgets' ) ) ) {
+			add_action( 'wp_dashboard_setup', array( $this, 'add_custom_dashboard_widget' ), 999 );
+		}
+
 	}
+
 	/**
 	 * Wrapper function to register a new user role
-	 * @param  string $post_type   Post type name
-	 * @param  string $plural      Post type item plural name
-	 * @param  string $single      Post type item single name
-	 * @param  string $description Description of post type
-	 * @return object              Post type class object
+	 * @return object              class object
 	 */
 	public function access_class_admin_role ( ) {
 		return new Simple_Custom_Admin_Roles ( );
 	}
 
+	/**
+	 * Wrapper function to modify user toles
+	 * @return object              class object
+	 */
 	public function role_edit ( ) {
 		return $this->access_class_admin_role();
 	}
 
-	function remove_helptabs( $old_help, $screen_id, $screen ){
+	/**
+	* Removes the Help tab in the WP Admin
+	*
+	* @param array $old_help
+	* @param int $screen_id
+	* @param obj $screen
+	* @return array
+	*/
+	public function remove_helptabs( $old_help, $screen_id, $screen ){
 		$screen->remove_help_tabs();
 		return $old_help;
 	}
 
+	public function remove_dashboard_meta() {
+		if ( ! current_user_can('manage_options') ) {
+			remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
+			remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
+			remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+			remove_meta_box( 'dashboard_secondary', 'dashboard', 'normal' );
+			remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );
+			remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
+			remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+			remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+
+			remove_action( 'welcome_panel', 'wp_welcome_panel' );
+	//		remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
+		}
+	}
+
+	public function add_custom_dashboard_widget() {
+		if ( !empty ( get_option( 'csa1_dashboard_title_1' ) ) ) {
+			$widget_title = get_option( 'csa1_dashboard_title_1' );
+		} else {
+			$widget_title = 'Dashboard Shortcuts' ;
+		}
+		wp_add_dashboard_widget(
+			'example_dashboard_widget',         // Widget slug.
+			$widget_title,
+			array( $this, 'get_dashboard_body' )
+		);
+	}
+
+	public function get_dashboard_body() {
+		if ( !empty ( get_option( 'csa1_dashboard_content_1' ) ) ) {
+			echo get_option( 'csa1_dashboard_content_1' );
+		} else {
+			echo 'Hi' ;
+		}
+	}
 
 	public function check_if_enabled ( $option_name ) {
 		if ( !empty ( get_option( $option_name ) ) ) {

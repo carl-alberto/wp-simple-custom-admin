@@ -98,8 +98,14 @@ class Simple_Custom_Admin_Roles {
 		delete_option( 'csa1_dashboard_image' );
 		delete_option( 'csa1_user_role_name' );
 		delete_option( 'csa1_admin_footer' );
+
 		delete_option( 'csa1_checkbox_settings' );
 		delete_option( 'csa1_checkbox_remove_help' );
+
+		delete_option( 'csa1_checkbox_remove_dashboard_widgets' );
+		delete_option( 'csa1_dashboard_title_1' );
+		delete_option( 'csa1_dashboard_content_1' );
+
 		remove_role( 'manager' );
 		remove_role( 'Manager' );
 		if ( !empty ( get_option( 'csa1_user_role_name' ) ) ) {

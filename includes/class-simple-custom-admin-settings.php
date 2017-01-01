@@ -175,7 +175,7 @@ class Simple_Custom_Admin_Settings {
 				array(
 					'id' 			=> 'checkbox_settings',
 					'label'			=> __( 'Remove Settings Access', 'simple-custom-admin' ),
-					'description'	=> __( 'This will remove the settings access', 'simple-custom-admin' ),
+					'description'	=> __( 'This will remove the Settings access', 'simple-custom-admin' ),
 					'type'			=> 'checkbox',
 					'default'		=> ''
 				),
@@ -202,6 +202,37 @@ class Simple_Custom_Admin_Settings {
 					'description'	=> __( 'This will delete / reset all changes when plugin is deleted or deactivated', 'simple-custom-admin' ),
 					'type'			=> 'checkbox',
 					'default'		=> ''
+				),
+			)
+		);
+
+		$settings['dashboard'] = array(
+			'title'					=> __( 'Custom Dashboard', 'simple-custom-admin' ),
+			'description'			=> __( 'You can customize this to modify the normal admin dashboard', 'simple-custom-admin' ),
+			'fields'				=> array(
+
+				array(
+					'id' 			=> 'checkbox_remove_dashboard_widgets',
+					'label'			=> __( 'Remove the default dashboard widgets', 'simple-custom-admin' ),
+					'description'	=> __( 'This will remove the default widgets', 'simple-custom-admin' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+				array(
+					'id' 			=> 'dashboard_title_1',
+					'label'			=> __( 'Dashboard Title' , 'simple-custom-admin' ),
+					'description'	=> __( '', 'simple-custom-admin' ),
+					'type'			=> 'text',
+					'default'		=> '',
+					'placeholder'	=> __( 'Change the title', 'simple-custom-admin' )
+				),
+				array(
+					'id' 			=> 'dashboard_content_1',
+					'label'			=> __( 'Custom Dashboard widget contents' , 'simple-custom-admin' ),
+					'description'	=> __( 'This accepts html.', 'simple-custom-admin' ),
+					'type'			=> 'textarea',
+					'default'		=> '',
+					'placeholder'	=> __( 'Change to remove current Dashboard widget contents ', 'simple-custom-admin' )
 				),
 			)
 		);
