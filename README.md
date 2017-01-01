@@ -7,17 +7,17 @@ This plugin will simply white label and easily customize your WordPress admin da
 Current Features:
 
 Display Settings
--Change login Logo
--Change dashboard icon
--Replace footer text & version with custom text
--Remove help
--Remove screen option
+- Change login Logo
+- Change dashboard icon
+- Replace footer text & version with custom text
+- Remove help
+- Remove screen option
 
 Management
--Add Manager Role below Administrator which can be customizable
--Manager Roles (by default, it has the same level as Administrator
--Disable Settings Access
--Disable user administration
+- Add Manager Role below Administrator which can be customizable
+- Manager Roles (by default, it has the same level as Administrator
+- Disable Settings Access
+- Disable user administration
 - Reset when deactivated
 
 
