@@ -123,6 +123,15 @@ class Simple_Custom_Admin {
 	public function user_filters() {
 		$this->check_setting( 'csa1_checkbox_settings' );
 		$this->check_setting( 'csa1_checkbox_user_edit' );
+		$this->check_setting( 'csa1_checkbox_plugin_edit' );
+		$this->check_setting( 'csa1_checkbox_theme_edit' );
+		$this->check_setting( 'csa1_checkbox_update_core' );
+		$this->check_setting( 'csa1_checkbox_remove_tools' );
+
+		$this->check_setting( 'csa1_checkbox_disable_posts' );
+		$this->check_setting( 'csa1_checkbox_disable_pages' );
+		$this->check_setting( 'csa1_checkbox_disable_media' );
+		$this->check_setting( 'csa1_checkbox_disable_comments' );
 	}
 
 	public function check_setting ( $setting_name ) {
@@ -130,12 +139,42 @@ class Simple_Custom_Admin {
 		switch ($setting_name) {
 			case 'csa1_checkbox_settings' :
 				$user_role->remove_manage_options ( $this->check_if_enabled( $setting_name ) );
-
 				break;
 
 			case 'csa1_checkbox_user_edit' :
 				$user_role->remove_manage_users ( $this->check_if_enabled( $setting_name ) );
+				break;
 
+			case 'csa1_checkbox_plugin_edit' :
+				$user_role->remove_manage_plugins ( $this->check_if_enabled( $setting_name ) );
+				break;
+
+			case 'csa1_checkbox_theme_edit' :
+				$user_role->remove_manage_theme ( $this->check_if_enabled( $setting_name ) );
+				break;
+
+			case 'csa1_checkbox_update_core' :
+				$user_role->remove_update_core ( $this->check_if_enabled( $setting_name ) );
+				break;
+
+			case 'csa1_checkbox_remove_tools' :
+				$user_role->remove_tools ( $this->check_if_enabled( $setting_name ) );
+				break;
+
+			case 'csa1_checkbox_disable_posts' :
+				$user_role->disable_posts ( $this->check_if_enabled( $setting_name ) );
+				break;
+
+			case 'csa1_checkbox_disable_pages' :
+				$user_role->disable_pages ( $this->check_if_enabled( $setting_name ) );
+				break;
+
+			case 'csa1_checkbox_disable_media' :
+				$user_role->disable_media ( $this->check_if_enabled( $setting_name ) );
+				break;
+
+			case 'csa1_checkbox_disable_comments' :
+				$user_role->disable_comments ( $this->check_if_enabled( $setting_name ) );
 				break;
 
 			default:
@@ -174,11 +213,12 @@ class Simple_Custom_Admin {
 			add_action( 'admin_init', array( $this, 'remove_dashboard_meta' ), 999 );
 		}
 
-		//This will display a customadmin dashboard  widget
+		//This will display a custom admin dashboard  widget
+
 		if ( !empty ( get_option( 'csa1_checkbox_remove_dashboard_widgets' ) ) ) {
 			add_action( 'wp_dashboard_setup', array( $this, 'add_custom_dashboard_widget' ), 999 );
 		}
-
+	
 	}
 
 	/**
@@ -465,7 +505,7 @@ class Simple_Custom_Admin {
 		if ( !empty ( get_option( 'csa1_user_role_name' ) ) ) {
 			$role_name = get_option( 'csa1_user_role_name' );
 		} else {
-			$role_name = 'manager' ;
+			$role_name = 'Manager' ;
 			add_option( 'csa1_user_role_name', $role_name );
 		}
 		$this->register_new_role($role_name);

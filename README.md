@@ -2,7 +2,7 @@
 
 Simple Custom Admin
 
-This plugin will simply white label and easily customize your WordPress admin dashboard panel
+This plugin will simply white label and easily customize your WordPress admin dashboard panel. Only one plugin to use when simplifying up your admin dashboard for your users.
 
 Current Features:
 

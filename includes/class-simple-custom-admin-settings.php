@@ -165,13 +165,34 @@ class Simple_Custom_Admin_Settings {
 			'description'			=> __( 'Settings associated to another user role that is an alternative to the Administrator', 'simple-custom-admin' ),
 			'fields'				=> array(
 				array(
-					'id' 			=> 'user_role_name',
-					'label'			=> __( 'User Role Name' , 'simple-custom-admin' ),
-					'description'	=> __( 'If you will be changing the name of the user role, make sure there are no more assigned users on this role', 'simple-custom-admin' ),
-					'type'			=> 'text',
-					'default'		=> 'manager',
-					'placeholder'	=> __( 'Do not leave blank', 'simple-custom-admin' )
+					'id' 			=> 'checkbox_disable_posts',
+					'label'			=> __( 'Remove Access to Posts', 'simple-custom-admin' ),
+					'description'	=> __( 'This will remove the Blog Posting access', 'simple-custom-admin' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
 				),
+				array(
+					'id' 			=> 'checkbox_disable_pages',
+					'label'			=> __( 'Remove Access to edit Pages', 'simple-custom-admin' ),
+					'description'	=> __( 'This will remove the edit Pages access', 'simple-custom-admin' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+				array(
+					'id' 			=> 'checkbox_disable_media',
+					'label'			=> __( 'Remove Access to Media', 'simple-custom-admin' ),
+					'description'	=> __( 'This will remove the Media library uploading, editing ang access', 'simple-custom-admin' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+				array(
+					'id' 			=> 'checkbox_disable_comments',
+					'label'			=> __( 'Remove Access to Comments', 'simple-custom-admin' ),
+					'description'	=> __( 'This will remove the Commenting access', 'simple-custom-admin' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+
 				array(
 					'id' 			=> 'checkbox_settings',
 					'label'			=> __( 'Remove Settings Access', 'simple-custom-admin' ),
@@ -183,6 +204,42 @@ class Simple_Custom_Admin_Settings {
 					'id' 			=> 'checkbox_user_edit',
 					'label'			=> __( 'Remove User Management', 'simple-custom-admin' ),
 					'description'	=> __( 'This will remove user management', 'simple-custom-admin' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+				array(
+					'id' 			=> 'checkbox_plugin_edit',
+					'label'			=> __( 'Remove Plugin Management', 'simple-custom-admin' ),
+					'description'	=> __( 'This will remove plugin management', 'simple-custom-admin' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+				array(
+					'id' 			=> 'checkbox_theme_edit',
+					'label'			=> __( 'Remove Theme Management', 'simple-custom-admin' ),
+					'description'	=> __( 'This will remove theme editing and management', 'simple-custom-admin' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+				array(
+					'id' 			=> 'checkbox_update_core',
+					'label'			=> __( 'Remove Core Update Capability', 'simple-custom-admin' ),
+					'description'	=> __( 'This will remove file editing, core updates and plugin updates capability', 'simple-custom-admin' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+				array(
+					'id' 			=> 'user_role_name',
+					'label'			=> __( 'User Role Name' , 'simple-custom-admin' ),
+					'description'	=> __( 'If you will be changing the name of the user role, make sure there are no more assigned users on this role', 'simple-custom-admin' ),
+					'type'			=> 'text',
+					'default'		=> 'manager',
+					'placeholder'	=> __( 'Do not leave blank, be careful when changing this value as it my mess up your existing custom roles', 'simple-custom-admin' )
+				),
+				array(
+					'id' 			=> 'checkbox_remove_tools',
+					'label'			=> __( 'Remove Tools', 'simple-custom-admin' ),
+					'description'	=> __( 'This will remove Tools', 'simple-custom-admin' ),
 					'type'			=> 'checkbox',
 					'default'		=> ''
 				),

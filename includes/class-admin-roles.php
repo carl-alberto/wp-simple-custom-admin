@@ -98,13 +98,23 @@ class Simple_Custom_Admin_Roles {
 		delete_option( 'csa1_dashboard_image' );
 		delete_option( 'csa1_user_role_name' );
 		delete_option( 'csa1_admin_footer' );
-
-		delete_option( 'csa1_checkbox_settings' );
 		delete_option( 'csa1_checkbox_remove_help' );
 
 		delete_option( 'csa1_checkbox_remove_dashboard_widgets' );
 		delete_option( 'csa1_dashboard_title_1' );
 		delete_option( 'csa1_dashboard_content_1' );
+
+		delete_option( 'csa1_checkbox_settings' );
+		delete_option( 'csa1_checkbox_user_edit' );
+		delete_option( 'csa1_checkbox_plugin_edit' );
+		delete_option( 'csa1_checkbox_theme_edit' );
+		delete_option( 'csa1_checkbox_update_core' );
+		delete_option( 'csa1_checkbox_remove_tools' );
+
+		delete_option( 'csa1_checkbox_disable_posts' );
+		delete_option( 'csa1_checkbox_disable_pages' );
+		delete_option( 'csa1_checkbox_disable_media' );
+		delete_option( 'csa1_checkbox_disable_comments' );
 
 		remove_role( 'manager' );
 		remove_role( 'Manager' );
@@ -144,21 +154,50 @@ class Simple_Custom_Admin_Roles {
 	 */
 	public function remove_capability ( $caps, $remove = true ) {
 		$edit_user = get_role( get_option( 'csa1_user_role_name' ) );
+		if ( $edit_user ) {
+			if ( !empty ( $caps ) ) {
+				if ( $remove ) {
+					foreach ( $caps as $cap ) {
+				    	$edit_user->remove_cap( $cap );
+				    }
+				} else {
+					foreach ( $caps as $cap ) {
+				    	$edit_user->add_cap( $cap );
+				    }
+				}
+			}
+		} else {
+			return false ;
+		}
+	}
+
+	public function remove_menuitem ( $menuitems, $remove = true ) {
+		$edit_user = get_role( get_option( 'csa1_user_role_name' ) );
 
 		if ( $remove ) {
-			foreach ( $caps as $cap ) {
-		    	$edit_user->remove_cap( $cap );
-		    }
+			foreach ( $menuitems as $menuitem ) {
+//				to be implemented
+//				remove_menu_page($menuitem);
+			}
 		} else {
-			foreach ( $caps as $cap ) {
-		    	$edit_user->add_cap( $cap );
-		    }
+			foreach ( $menuitems as $menuitem ) {
+				$edit_user->add_cap( $cap );
+			}
 		}
 	}
 
 	public function remove_manage_options ( $remove = true ) {
 		$caps = array(
 				'manage_options',
+				'create_sites',
+				'delete_sites',
+				'manage_network',
+				'manage_sites',
+				'manage_network_users',
+				'manage_network_plugins',
+				'manage_network_themes',
+				'manage_network_options',
+				'delete_site',
 			);
 		$this->remove_capability( $caps, $remove );
 	}
@@ -168,6 +207,111 @@ class Simple_Custom_Admin_Roles {
 				'edit_users',
 				'create_users',
 				'delete_users',
+				'list_users',
+				'promote_users',
+				'remove_users',
+			);
+		$this->remove_capability( $caps, $remove );
+	}
+
+	public function remove_manage_plugins ( $remove = true ) {
+		$caps = array(
+				'activate_plugins',
+				'upload_plugins',
+				'delete_plugins',
+				'edit_plugins',
+				'install_plugins',
+			);
+		$this->remove_capability( $caps, $remove );
+	}
+
+	public function remove_manage_theme ( $remove = true ) {
+		$caps = array(
+				'upload_themes',
+				'delete_themes',
+				'edit_themes',
+				'edit_theme_options',
+				'install_themes',
+				'switch_themes',
+				'update_themes',
+			);
+		$this->remove_capability( $caps, $remove );
+	}
+
+	public function remove_update_core ( $remove = true ) {
+		$caps = array(
+				'edit_files',
+				'update_core',
+				'update_plugins',
+				'edit_dashboard',
+				'customize',
+			);
+		$this->remove_capability( $caps, $remove );
+	}
+
+	public function remove_tools ( $remove = true ) {
+		$caps = array(
+				'export',
+				'import',
+			);
+		$this->remove_capability( $caps, $remove );
+//		$remove ? $this->temporary_hide_menu() : 0 ;
+//		hook this to admin menu
+	}
+
+	public function temporary_hide_menu() {
+		?>
+			<style type="text/css">
+				.menu-icon-tools {display: none;}
+			</style>
+		<?php
+	}
+
+	public function disable_posts ( $remove = true ) {
+		$caps = array(
+				'edit_others_posts',
+				'delete_others_posts',
+				'delete_private_posts',
+				'edit_private_posts',
+				'read_private_posts',
+				'edit_published_posts',
+				'delete_published_posts',
+				'edit_posts',
+				'delete_posts',
+				'edit_others_posts',
+				'unfiltered_html',
+				'manage_categories',
+			);
+		$this->remove_capability( $caps, $remove );
+	}
+
+	public function disable_pages ( $remove = true ) {
+		$caps = array(
+				'read_private_pages',
+				'edit_private_pages',
+				'delete_private_pages',
+				'delete_published_pages',
+				'delete_others_pages',
+				'delete_pages',
+				'publish_pages',
+				'edit_published_pages',
+				'edit_others_pages',
+				'edit_pages',
+				'manage_links',
+			);
+		$this->remove_capability( $caps, $remove );
+	}
+
+	public function disable_media ( $remove = true ) {
+		$caps = array(
+				'upload_files',
+			);
+		$this->remove_capability( $caps, $remove );
+	}
+
+	public function disable_comments ( $remove = true ) {
+		$caps = array(
+				'moderate_comments',
 			);
 		$this->remove_capability( $caps, $remove );
 	}
