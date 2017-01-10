@@ -29,3 +29,13 @@ Management
 Custom dashboard
 - Remove the default dashboard widgets
 - Create and additional dashboard that accepts html
+
+== Changelog ==
+
+= 1.1 =
+* 2017-01-10
+* Updated code to adhere with WP Coding Standards
+
+= 1.0 =
+* 2016-12-31
+* Initial release

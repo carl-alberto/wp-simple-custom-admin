@@ -4,11 +4,11 @@ Donate link: https://carl.alber2.com/
 Tags: wordpress, plugin, template, admin, dashboard, user
 Requires at least: 3.9
 Tested up to: 4.0
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simple plugin to customize or white label the WP admin dashboard
+Simple plugin to customize or white label the WP admin dashboard for non Administrator accounts.
 
 == Description ==
 
@@ -16,7 +16,7 @@ Simple plugin to customize or white label the WP admin dashboard
 
 Simple Custom Admin
 
-This plugin will simply white label and easily customize your WordPress admin dashboard panel
+This plugin will simply white label and easily customize your WordPress admin dashboard panel for non Administrator accounts.
 
 Current Features:
 
@@ -63,6 +63,10 @@ Installing "Simple Custom Admin" can be done either by searching for "Simple Cus
 This plugin template is designed to help to customize the admin
 
 == Changelog ==
+
+= 1.1 =
+* 2017-01-10
+* Updated code to adhere with WP Coding Standards
 
 = 1.0 =
 * 2016-12-31

@@ -1,12 +1,29 @@
 <?php
+/**
+ * Contains class for the admin functions.
+ *
+ * @package Simple Custom Admin
+ * @author Carl Alberto
+ * @since 1.0.0
+ */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
+/**
+ * Class used for the custom roles options.
+ *
+ * @package Simple Custom Admin
+ * @author Carl Alberto
+ * @since 1.0.0
+ */
 class Simple_Custom_Admin_Roles {
 
 	/**
 	 * The single instance of Simple_Custom_Admin_Roles.
-	 * @var 	object
+	 *
+	 * @var		object
 	 * @access  private
 	 * @since 	1.0.0
 	 */
@@ -14,6 +31,7 @@ class Simple_Custom_Admin_Roles {
 
 	/**
 	 * Settings class object
+	 *
 	 * @var     object
 	 * @access  public
 	 * @since   1.0.0
@@ -22,7 +40,8 @@ class Simple_Custom_Admin_Roles {
 
 	/**
 	 * The version number.
-	 * @var     string
+	 *
+	 * @var		string
 	 * @access  public
 	 * @since   1.0.0
 	 */
@@ -30,6 +49,7 @@ class Simple_Custom_Admin_Roles {
 
 	/**
 	 * The token.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -38,6 +58,7 @@ class Simple_Custom_Admin_Roles {
 
 	/**
 	 * The main plugin file.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -46,6 +67,7 @@ class Simple_Custom_Admin_Roles {
 
 	/**
 	 * The main plugin directory.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -54,6 +76,7 @@ class Simple_Custom_Admin_Roles {
 
 	/**
 	 * The plugin assets directory.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -62,6 +85,7 @@ class Simple_Custom_Admin_Roles {
 
 	/**
 	 * The plugin assets URL.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -70,6 +94,7 @@ class Simple_Custom_Admin_Roles {
 
 	/**
 	 * Suffix for Javascripts.
+	 *
 	 * @var     string
 	 * @access  public
 	 * @since   1.0.0
@@ -78,21 +103,23 @@ class Simple_Custom_Admin_Roles {
 
 	/**
 	 * Constructor function.
+	 *
 	 * @access  public
 	 * @since   1.0.0
 	 * @return  void
 	 */
-	public function __construct ( ) {
+	public function __construct() {
 
 	} // End __construct ()
 
 	/**
 	 * Clears all data
+	 *
 	 * @access  public
 	 * @since   1.0.0
 	 * @return  void
 	 */
-	public function clear_all_items () {
+	public function clear_all_items() {
 		delete_option( 'csa1_reset_checkbox' );
 		delete_option( 'csa1_login_image' );
 		delete_option( 'csa1_dashboard_image' );
@@ -118,7 +145,7 @@ class Simple_Custom_Admin_Roles {
 
 		remove_role( 'manager' );
 		remove_role( 'Manager' );
-		if ( !empty ( get_option( 'csa1_user_role_name' ) ) ) {
+		if ( ! ( empty( get_option( 'csa1_user_role_name' ) ) ) ) {
 			$role_name = get_option( 'csa1_user_role_name' );
 			remove_role( $role_name );
 		}
@@ -126,10 +153,11 @@ class Simple_Custom_Admin_Roles {
 
 	/**
 	 * Register a new user role
-	 * @param  string $role_name   Role name
+	 *
+	 * @param  string $role_name   Role name.
 	 * @return void
 	 */
-	public function add_custom_role ( $role_name ) {
+	public function add_custom_role( $role_name ) {
 		add_role(
 			$role_name,
 			$role_name,
@@ -139,23 +167,25 @@ class Simple_Custom_Admin_Roles {
 
 	/**
 	 * Gets the capabilites of the administrator role
-	 * @return array of admin rolse
+	 *
+	 * @return array of admin roles.
 	 */
-	public function default_admin_capabilities () {
+	public function default_admin_capabilities() {
 		$admin_role_set = get_role( 'administrator' )->capabilities;
 		return $admin_role_set;
 	}
 
 	/**
-	 * Remove capabilites to  custom role assignede in the plugin
-	 * @param  array $caps  Array of capabilites see https://codex.wordpress.org/Roles_and_Capabilities
-	 * @param  string $remove  if set to false, it will add the capability back
-	 * @return void
+	 * Remove capabilites to  custom role assigned in the plugin.
+	 *
+	 * @param	array   $caps Array of capabilites see https://codex.wordpress.org/Roles_and_Capabilities.
+	 * @param	boolean $remove  if set to false, it will add the capability back.
+	 * @return false if $edit_user is empty.
 	 */
-	public function remove_capability ( $caps, $remove = true ) {
+	public function remove_capability( $caps, $remove = true ) {
 		$edit_user = get_role( get_option( 'csa1_user_role_name' ) );
 		if ( $edit_user ) {
-			if ( !empty ( $caps ) ) {
+			if ( ! (empty( $caps ) ) ) {
 				if ( $remove ) {
 					foreach ( $caps as $cap ) {
 				    	$edit_user->remove_cap( $cap );
@@ -171,13 +201,19 @@ class Simple_Custom_Admin_Roles {
 		}
 	}
 
-	public function remove_menuitem ( $menuitems, $remove = true ) {
+	/**
+	 * Modifies the existing menu with a specific custom user role.
+	 *
+	 * @param   array   $menuitems  Array of menu items that will be removed.
+	 * @param	boolean $remove if set to false, it will add the menuitem back.
+	 * @return false if $edit_user is empty.
+	 */
+	public function remove_menuitem( $menuitems, $remove = true ) {
 		$edit_user = get_role( get_option( 'csa1_user_role_name' ) );
-
 		if ( $remove ) {
 			foreach ( $menuitems as $menuitem ) {
-//				to be implemented
-//				remove_menu_page($menuitem);
+				break; // Temporary breaks code. Still needs to be implemented.
+				return $menuitem;
 			}
 		} else {
 			foreach ( $menuitems as $menuitem ) {
@@ -186,7 +222,12 @@ class Simple_Custom_Admin_Roles {
 		}
 	}
 
-	public function remove_manage_options ( $remove = true ) {
+	/**
+	 * Remove an array of Administrators capability.
+	 *
+	 * @param	boolean $remove if set to false, otherwise it will add the capabilities back.
+	 */
+	public function remove_manage_options( $remove = true ) {
 		$caps = array(
 				'manage_options',
 				'create_sites',
@@ -202,7 +243,12 @@ class Simple_Custom_Admin_Roles {
 		$this->remove_capability( $caps, $remove );
 	}
 
-	public function remove_manage_users ( $remove = true ) {
+	/**
+	 * Remove an array of capability to manage users.
+	 *
+	 * @param	boolean $remove if set to false, otherwise it will add the capabilities back.
+	 */
+	public function remove_manage_users( $remove = true ) {
 		$caps = array(
 				'edit_users',
 				'create_users',
@@ -214,7 +260,12 @@ class Simple_Custom_Admin_Roles {
 		$this->remove_capability( $caps, $remove );
 	}
 
-	public function remove_manage_plugins ( $remove = true ) {
+	/**
+	 * Remove an array of capability to manage plugins.
+	 *
+	 * @param	boolean $remove if set to false, otherwise it will add the capabilities back.
+	 */
+	public function remove_manage_plugins( $remove = true ) {
 		$caps = array(
 				'activate_plugins',
 				'upload_plugins',
@@ -225,7 +276,12 @@ class Simple_Custom_Admin_Roles {
 		$this->remove_capability( $caps, $remove );
 	}
 
-	public function remove_manage_theme ( $remove = true ) {
+	/**
+	 * Remove an array of capability manage plugins.
+	 *
+	 * @param	boolean $remove if set to false, otherwise it will add the capabilities back.
+	 */
+	public function remove_manage_theme( $remove = true ) {
 		$caps = array(
 				'upload_themes',
 				'delete_themes',
@@ -238,7 +294,12 @@ class Simple_Custom_Admin_Roles {
 		$this->remove_capability( $caps, $remove );
 	}
 
-	public function remove_update_core ( $remove = true ) {
+	/**
+	 * Remove an array of capability to update files and core.
+	 *
+	 * @param	boolean $remove if set to false, otherwise it will add the capabilities back.
+	 */
+	public function remove_update_core( $remove = true ) {
 		$caps = array(
 				'edit_files',
 				'update_core',
@@ -249,25 +310,26 @@ class Simple_Custom_Admin_Roles {
 		$this->remove_capability( $caps, $remove );
 	}
 
-	public function remove_tools ( $remove = true ) {
+	/**
+	 * Remove an array of capability for the tools.
+	 *
+	 * @param	boolean $remove if set to false, otherwise it will add the capabilities back.
+	 */
+	public function remove_tools( $remove = true ) {
 		$caps = array(
 				'export',
 				'import',
 			);
 		$this->remove_capability( $caps, $remove );
-//		$remove ? $this->temporary_hide_menu() : 0 ;
-//		hook this to admin menu
+		// Still need to find a function to hide the tools menus in the admin.
 	}
 
-	public function temporary_hide_menu() {
-		?>
-			<style type="text/css">
-				.menu-icon-tools {display: none;}
-			</style>
-		<?php
-	}
-
-	public function disable_posts ( $remove = true ) {
+	/**
+	 * Remove an array of capability to manage posts.
+	 *
+	 * @param	boolean $remove if set to false, otherwise it will add the capabilities back.
+	 */
+	public function disable_posts( $remove = true ) {
 		$caps = array(
 				'edit_others_posts',
 				'delete_others_posts',
@@ -285,7 +347,12 @@ class Simple_Custom_Admin_Roles {
 		$this->remove_capability( $caps, $remove );
 	}
 
-	public function disable_pages ( $remove = true ) {
+	/**
+	 * Remove an array of capability to manage pages.
+	 *
+	 * @param	boolean $remove if set to false, otherwise it will add the capabilities back.
+	 */
+	public function disable_pages( $remove = true ) {
 		$caps = array(
 				'read_private_pages',
 				'edit_private_pages',
@@ -302,19 +369,28 @@ class Simple_Custom_Admin_Roles {
 		$this->remove_capability( $caps, $remove );
 	}
 
-	public function disable_media ( $remove = true ) {
+	/**
+	 * Remove an array of capability to manage media.
+	 *
+	 * @param	boolean $remove if set to false, otherwise it will add the capabilities back.
+	 */
+	public function disable_media( $remove = true ) {
 		$caps = array(
 				'upload_files',
 			);
 		$this->remove_capability( $caps, $remove );
 	}
 
-	public function disable_comments ( $remove = true ) {
+	/**
+	 * Remove an array of capability to manage comments.
+	 *
+	 * @param	boolean $remove if set to false, otherwise it will add the capabilities back.
+	 */
+	public function disable_comments( $remove = true ) {
 		$caps = array(
 				'moderate_comments',
 			);
 		$this->remove_capability( $caps, $remove );
 	}
-
 
 }
