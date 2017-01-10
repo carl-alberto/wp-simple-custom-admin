@@ -8,7 +8,7 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simple plugin to customize or white label the WP admin dashboard
+Simple plugin to customize or white label the WP admin dashboard for non Administrator accounts.
 
 == Description ==
 
@@ -16,7 +16,7 @@ Simple plugin to customize or white label the WP admin dashboard
 
 Simple Custom Admin
 
-This plugin will simply white label and easily customize your WordPress admin dashboard panel
+This plugin will simply white label and easily customize your WordPress admin dashboard panel for non Administrator accounts.
 
 Current Features:
 

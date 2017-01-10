@@ -3,7 +3,7 @@
  * Plugin Name: Simple Custom Admin
  * Version: 1.0
  * Plugin URI: https://profiles.wordpress.org/carl-alberto#content-plugins
- * Description: Simple plugin to customize or white label the WP admin dashboard
+ * Description: Simple plugin to customize or white label the WP admin dashboard for non Administrator accounts.
  * Author: Carl Alberto
  * Author URI: https://carl.alber2.com/
  * Requires at least: 4.0
@@ -23,6 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 require_once( 'includes/class-simple-custom-admin.php' );
 require_once( 'includes/class-simple-custom-admin-settings.php' );
 
+
+
 // Load plugin libraries
 require_once( 'includes/lib/class-simple-custom-admin-admin-api.php' );
 
@@ -40,7 +42,7 @@ function Simple_Custom_Admin () {
 	if ( is_null( $instance->settings ) ) {
 		$instance->settings = Simple_Custom_Admin_Settings::instance( $instance );
 	}
-	
+
 	return $instance;
 }
 
