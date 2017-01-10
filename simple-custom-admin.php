@@ -37,7 +37,7 @@ require_once( 'includes/class-admin-roles.php' );
  * @return object Simple_Custom_Admin
  */
 function simple_custom_admin() {
-	$instance = Simple_Custom_Admin::instance( __FILE__, '1.0.0' );
+	$instance = Simple_Custom_Admin::instance( __FILE__, '1.1' );
 
 	if ( is_null( $instance->settings ) ) {
 		$instance->settings = Simple_Custom_Admin_Settings::instance( $instance );
