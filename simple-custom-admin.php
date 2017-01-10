@@ -25,13 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once( 'includes/class-simple-custom-admin.php' );
 require_once( 'includes/class-simple-custom-admin-settings.php' );
 
-<<<<<<< HEAD
 // Load plugin libraries.
-=======
-
-
-// Load plugin libraries
->>>>>>> master
 require_once( 'includes/lib/class-simple-custom-admin-admin-api.php' );
 
 // Load custom admin roles.
