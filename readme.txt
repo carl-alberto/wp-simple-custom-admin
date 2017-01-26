@@ -4,7 +4,7 @@ Donate link: https://carl.alber2.com/
 Tags: wordpress, plugin, template, admin, dashboard, user
 Requires at least: 3.9
 Tested up to: 4.0
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,11 @@ Installing "Simple Custom Admin" can be done either by searching for "Simple Cus
 This plugin template is designed to help to customize the admin
 
 == Changelog ==
+
+= 1.2 =
+* 2017-01-26
+* Fixed broken admin when proper escape html tags is used
+* Restrict access on settings page for non Administrator roles
 
 = 1.1 =
 * 2017-01-10

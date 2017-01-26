@@ -373,7 +373,7 @@ class Simple_Custom_Admin_Settings {
 	 */
 	public function settings_section( $section ) {
 		$html = '<p> ' . $this->settings[ $section['id'] ]['description'] . '</p>' . "\n";
-		echo  $html ;
+		echo $html;
 	}
 
 	/**
@@ -382,6 +382,7 @@ class Simple_Custom_Admin_Settings {
 	 * @return void
 	 */
 	public function settings_page() {
+		if ( current_user_can( 'create_users' ) ) {
 
 		// Build page HTML.
 		$html = '<div class="wrap" id="' . $this->parent->_token . '_settings">' . "\n";
@@ -411,7 +412,7 @@ class Simple_Custom_Admin_Settings {
 					$tab_link = remove_query_arg( 'settings-updated', $tab_link );
 				}
 				// Output tab.
-				$html .= '<a href="' . $tab_link . '" class="' .  $class  . '">' .  $data['title'] . '</a>' . "\n";
+				$html .= '<a href="' . $tab_link . '" class="' . esc_attr( $class ) . '">' . esc_html( $data['title'] ) . '</a>' . "\n";
 				++$c;
 			}
 			$html .= '</h2>' . "\n";
@@ -430,6 +431,9 @@ class Simple_Custom_Admin_Settings {
 		$html .= '</div>' . "\n";
 
 		echo $html;
+	} else {
+		echo 'no access';
+	}
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Simple Custom Admin
- * Version: 1.1
+ * Version: 1.2
  * Plugin URI: https://profiles.wordpress.org/carl-alberto#content-plugins
  * Description: Simple plugin to customize or white label the WP admin dashboard for non Administrator accounts.
  * Author: Carl Alberto

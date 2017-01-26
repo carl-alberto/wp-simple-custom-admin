@@ -32,6 +32,11 @@ Custom dashboard
 
 == Changelog ==
 
+= 1.2 =
+* 2017-01-26
+* Fixed broken admin when proper escape html tags is used
+* Restrict access on settings page for non Administrator roles
+
 = 1.1 =
 * 2017-01-10
 * Updated code to adhere with WP Coding Standards
